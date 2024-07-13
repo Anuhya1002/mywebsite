@@ -26,6 +26,7 @@ body {
   margin-bottom: 16px !important;
   max-width: 500px;
   cursor: pointer;
+  margin-right: 12px;
 }
 
 .price {
@@ -53,6 +54,7 @@ body {
   background-color: silver;
   border-radius: 16px;
   margin-bottom: 16px;
+  padding: 20px;
 }
 .cart-count {
   margin-right: 60px;
@@ -71,4 +73,10 @@ body {
 
 .clear {
   margin-right: 16px;
+}
+
+.spinner{
+  color: #0098de;
+  width: 250px;
+  height: 250px;
 }

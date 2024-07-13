@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import * as ReactBootStrap from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Homepage() {
@@ -112,7 +113,11 @@ export default function Homepage() {
                   </div>
                 ))
               ) : (
-                <p>Loading products...</p>
+                <ReactBootStrap.Spinner
+                  className="spinner"
+                  animation="border"
+                  variant="primary"
+                />
               )}
             </div>
           </div>
