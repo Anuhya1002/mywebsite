@@ -1,28 +1,30 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { useTheme } from "../context/ThemeContext";
 
 export default function Details() {
-  const [product, setProduct] = useState(null);
+  const [data, setData] = useState(null);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products/2")
+    fetch("https://disease.sh/v3/covid-19/all")
       .then((res) => res.json())
-      .then((json) => setProduct(json));
+      .then((json) => setData(json));
   }, []);
 
-  console.log(product);
+  console.log(data);
 
   return (
     <div className="container">
-      {product ? (
-        <div className="product-details">
-          <img src={product.image} alt={product.title} />
-          <h2>{product.title}</h2>
-          <p>{product.description}</p>
-          <h3>${product.price}</h3>
+      {data ? (
+        <div className="details">
+          <h2>COVID-19 Global Data</h2>
+          <p>Cases: {data.cases}</p>
+          <p>Deaths: {data.deaths}</p>
+          <p>Recovered: {data.recovered}</p>
         </div>
       ) : (
-        <p>Loading product...</p>
+        <p>Loading data...</p>
       )}
     </div>
   );

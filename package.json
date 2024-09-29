@@ -3,18 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-table": "^8.20.1",
     "bootstrap": "^3.4.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
     "next": "^14.2.5",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.24.0"
+    "react-router-dom": "^6.24.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
