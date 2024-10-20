@@ -2,6 +2,12 @@ body {
   margin: 0px;
   padding: 0px;
 }
+a {
+  text-decoration: none !important;
+}
+li{
+  list-style: none !important;
+}
 
 .products-cards {
   display: block;
@@ -26,6 +32,7 @@ body {
   margin-bottom: 16px !important;
   max-width: 500px;
   cursor: pointer;
+  margin-right: 12px;
 }
 
 .price {
@@ -53,6 +60,7 @@ body {
   background-color: silver;
   border-radius: 16px;
   margin-bottom: 16px;
+  padding: 20px;
 }
 .cart-count {
   margin-right: 60px;
@@ -72,3 +80,70 @@ body {
 .clear {
   margin-right: 16px;
 }
+
+.spinner {
+  color: #0098de;
+  width: 250px;
+  height: 250px;
+}
+
+.light {
+  background-color: #fff;
+  .links {
+    ul {
+      li {
+        color: black;
+      }
+    }
+  }
+  .heading {
+    color: black;
+  }
+}
+
+.dark {
+  background-color: #333;
+}
+
+.header-section {
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heading {
+  color: white;
+  margin-bottom: 24px;
+  font-size: 42px;
+}
+
+.links {
+  ul {
+    list-style: none;
+    display: flex;
+    li {
+      color: white;
+      margin-right: 22px;
+      cursor: pointer;
+      font-size: 24px;
+      font-weight: 500;
+    }
+  }
+}
+
+.footer-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+footer{
+  background-color: black;
+  color: white;
+}
+
+.login-page{
+  text-align: center;
+  padding: 100px 0px;
+}
+

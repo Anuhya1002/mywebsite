@@ -18,9 +18,8 @@ export default function Authors() {
         console.error("Error fetching data:", error);
       }
     }
-    fetchData(); 
+    fetchData();
   }, []);
-
 
   const eraseData = () => {
     setData([]);
