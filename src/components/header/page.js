@@ -1,14 +1,17 @@
 "use client";
 import React from "react";
-import { useTheme } from "../context/ThemeContext";
-import { headerData } from '../data/header';
+import Link from "next/link";
+import { useTheme } from "../../app/context/ThemeContext";
+import Headerdata from "../../../data/header.json";
 
-const Header = () => {
+const header = () => {
   const { theme, toggleTheme } = useTheme();
-  console.log(headerData);
+  console.log(Headerdata);
 
   return (
-    <header className={`${theme === "light" ? "dark" : "light"}`}>
+    <header
+      className={`${theme === "light" ? "dark" : "light"} container-fluid`}
+    >
       <div className="header-section">
         <div className="heading-section">
           <h1 className="heading">Anime Streaming Platform</h1>
@@ -19,11 +22,11 @@ const Header = () => {
 
         <div className="links">
           <ul>
-            <li>Home</li>
-            <li>About</li>
-            <li>Contact</li>
-            <li>Careers</li>
-            <li>Login</li>
+          {Headerdata.headerData.map((item, index) => (
+              <li key={index}>
+                <Link href={item.path}>{item.name}</Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -31,4 +34,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default header;

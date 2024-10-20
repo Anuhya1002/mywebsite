@@ -2,6 +2,12 @@ body {
   margin: 0px;
   padding: 0px;
 }
+a {
+  text-decoration: none !important;
+}
+li{
+  list-style: none !important;
+}
 
 .products-cards {
   display: block;
@@ -125,3 +131,19 @@ body {
     }
   }
 }
+
+.footer-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+footer{
+  background-color: black;
+  color: white;
+}
+
+.login-page{
+  text-align: center;
+  padding: 100px 0px;
+}
+
