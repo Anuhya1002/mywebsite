@@ -1,31 +1,64 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import Dashboard from "@/app/Dashboard/page";
 
 export default function LoginAndSignup() {
   const [showSignup, setShowSignup] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
-  const [email, setEmail] = useState();
-  const [name, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [loggedin, setLoggedIn] = useState(false);
+
+  // const navigate = useNavigate();
+
   const handleSignupClose = () => setShowSignup(false);
   const handleSignupShow = () => setShowSignup(true);
 
   const handleLoginClose = () => setShowLogin(false);
   const handleLoginShow = () => setShowLogin(true);
 
-  const handleonsubmitGroup = (e) => {
-    e.preventDefault();
-    const formData = { email ,name, password };
-    console.log(formData);
-    if (formData){
-        localStorage.setItem("formData", formData);
-    }
+  // Validation schemas for Formik
+  const signupValidationSchema = Yup.object({
+    email: Yup.string().email("Invalid email format").required("Required"),
+    name: Yup.string().required("Required"),
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters")
+      .required("Required"),
+  });
+
+  const loginValidationSchema = Yup.object({
+    email: Yup.string().email("Invalid email format").required("Required"),
+    password: Yup.string().required("Required"),
+  });
+
+  const handleSignupSubmit = (values, { resetForm }) => {
+    console.log("Signup Data:", values);
+    localStorage.setItem("formData", JSON.stringify(values));
+    resetForm();
+    handleSignupClose();
   };
 
-  useEffect(() => {
-    
-  })
+  const handleLoginSubmit = (values, { resetForm }) => {
+    console.log("Login Data:", values);
+    const storedData = JSON.parse(localStorage.getItem("formData"));
+    if (
+      storedData &&
+      storedData.email === values.email &&
+      storedData.password === values.password
+    ) {
+      setLoggedIn(true);
+      navigate("./Dashboard");
+    } else {
+      alert("Invalid Login Credentials");
+    }
+    resetForm();
+    handleLoginClose();
+  };
+
+  if (loggedin) {
+    return <Dashboard />;
+  }
 
   return (
     <section className="login-page">
@@ -42,57 +75,71 @@ export default function LoginAndSignup() {
           <Modal.Title>Sign Up</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={handleonsubmitGroup}>
-            {/* Email Input */}
-            <div className="form-group">
-              <input
-                type="email"
-                placeholder="Your Email Address"
-                size={40}
-                className="form-control p-3 m-2"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
+          <Formik
+            initialValues={{ email: "", name: "", password: "" }}
+            validationSchema={signupValidationSchema}
+            onSubmit={handleSignupSubmit}
+          >
+            {() => (
+              <Form>
+                {/* Email Input */}
+                <div className="form-group">
+                  <Field
+                    type="email"
+                    name="email"
+                    placeholder="Your Email Address"
+                    className="form-control p-3 m-2"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="text-danger"
+                  />
+                </div>
 
-            {/* Username Input */}
-            <div className="form-group">
-              <input
-                type="text"
-                placeholder="Enter Username"
-                size={40}
-                className="form-control p-3 m-2"
-                required
-                value={name}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </div>
+                {/* Username Input */}
+                <div className="form-group">
+                  <Field
+                    type="text"
+                    name="name"
+                    placeholder="Enter Username"
+                    className="form-control p-3 m-2"
+                  />
+                  <ErrorMessage
+                    name="name"
+                    component="div"
+                    className="text-danger"
+                  />
+                </div>
 
-            {/* Password Input */}
-            <div className="form-group">
-              <input
-                type="password"
-                placeholder="Your Password"
-                size={40}
-                className="form-control p-3 m-2"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+                {/* Password Input */}
+                <div className="form-group">
+                  <Field
+                    type="password"
+                    name="password"
+                    placeholder="Your Password"
+                    className="form-control p-3 m-2"
+                  />
+                  <ErrorMessage
+                    name="password"
+                    component="div"
+                    className="text-danger"
+                  />
+                </div>
 
-            {/* Submit Button (optional) */}
-            <div className="form-group">
-              <button type="submit" className="btn btn-primary m-2">
-                Submit
-              </button>
-            </div>
-          </form>
+                {/* Submit Button */}
+                <div className="form-group">
+                  <button type="submit" className="btn btn-primary m-2">
+                    Submit
+                  </button>
+                </div>
+              </Form>
+            )}
+          </Formik>
         </Modal.Body>
       </Modal>
 
-      <p className="p-3 m-3">Already Existing user?</p>
+      <p className="p-3 m-3">Already an existing user?</p>
 
       {/* Log In Button */}
       <div>
@@ -107,32 +154,52 @@ export default function LoginAndSignup() {
           <Modal.Title>Log In</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form>
-            {/* Email Input */}
-            <div className="form-group">
-              <input
-                type="email"
-                placeholder="Your Email Address"
-                size={40}
-                className="form-control p-3 m-2"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="password"
-                placeholder="Your Password"
-                size={40}
-                className="form-control p-3 m-2"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <button type="submit" className="btn btn-primary m-2">
-                Login
-              </button>
-            </div>
-          </form>
+          <Formik
+            initialValues={{ email: "", password: "" }}
+            validationSchema={loginValidationSchema}
+            onSubmit={handleLoginSubmit}
+          >
+            {() => (
+              <Form>
+                {/* Email Input */}
+                <div className="form-group">
+                  <Field
+                    type="email"
+                    name="email"
+                    placeholder="Your Email Address"
+                    className="form-control p-3 m-2"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="text-danger"
+                  />
+                </div>
+
+                {/* Password Input */}
+                <div className="form-group">
+                  <Field
+                    type="password"
+                    name="password"
+                    placeholder="Your Password"
+                    className="form-control p-3 m-2"
+                  />
+                  <ErrorMessage
+                    name="password"
+                    component="div"
+                    className="text-danger"
+                  />
+                </div>
+
+                {/* Submit Button */}
+                <div className="form-group">
+                  <button type="submit" className="btn btn-primary m-2">
+                    Login
+                  </button>
+                </div>
+              </Form>
+            )}
+          </Formik>
         </Modal.Body>
       </Modal>
     </section>

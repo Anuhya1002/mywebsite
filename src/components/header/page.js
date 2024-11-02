@@ -6,15 +6,16 @@ import Headerdata from "../../../data/header.json";
 
 const header = () => {
   const { theme, toggleTheme } = useTheme();
-  console.log(Headerdata);
 
   return (
     <header
       className={`${theme === "light" ? "dark" : "light"} container-fluid`}
     >
       <div className="header-section">
-        <div className="heading-section">
-          <h1 className="heading">Anime Streaming Platform</h1>
+        <div className="heading-section d-flex flex-column align-items-start">
+          <div>
+          <a className="heading" href="/" >Anime Streaming Platform</a>
+          </div>
           <button onClick={toggleTheme} className="btn btn-primary">
             Toggle to {theme === "light" ? "Light" : "Dark"} Theme
           </button>
