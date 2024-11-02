@@ -3,7 +3,14 @@
 import React, { useEffect, useState } from "react";
 import * as ReactBootStrap from "react-bootstrap";
 
-export default function Product({ searchTerm, setCount, setTotal, count, total, message }) {
+export default function Product({
+  searchTerm,
+  setCount,
+  setTotal,
+  count,
+  total,
+  message,
+}) {
   const [data, setData] = useState([]);
 
   // Add to Cart function
@@ -36,36 +43,36 @@ export default function Product({ searchTerm, setCount, setTotal, count, total, 
   }, []);
 
   return (
-    <div className="products-cards">
+    <div className="d-flex flex-wrap">
       {filteredData.length > 0 ? (
         filteredData.map((product) => (
-          <><div key={product.id} className="each-card">
-                <a>
-                    <img
-                        src={product.image}
-                        className="product-image"
-                        alt={product.title} />
-                    <h3 className="title">{product.title}</h3>
-                    <p>{product.description}</p>
-                    <h1 className="price">${product.price}</h1>
-                    <p>Rating: {product.rating.rate}</p>
-                </a>
-                <button
-                    className="btn btn-success"
-                    onClick={() => addToCart(product.price)}
-                >
-                    Add to cart
-                </button>
-                <button
-                    className="btn btn-danger"
-                    onClick={() => minusFromCart(product.price)}
-                >
-                    -
-                </button>
-
-            </div><div>
-                    <h1 className="btn-primary btn">{message}</h1>
-                </div></>
+          <>
+            <div key={product.id} className="each-card">
+              <a>
+                <img
+                  src={product.image}
+                  className="product-image"
+                  alt={product.title}
+                />
+                <h3 className="title">{product.title}</h3>
+                <p>{product.description}</p>
+                <h1 className="price">${product.price}</h1>
+                <p>Rating: {product.rating.rate}</p>
+              </a>
+              <button
+                className="btn btn-success"
+                onClick={() => addToCart(product.price)}
+              >
+                Add to cart
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={() => minusFromCart(product.price)}
+              >
+                -
+              </button>
+            </div>
+          </>
         ))
       ) : (
         <ReactBootStrap.Spinner

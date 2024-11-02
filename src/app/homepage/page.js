@@ -32,9 +32,9 @@ export default function Homepage() {
     <section>
       <div className="toggle-section">
         {/* Theme Toggle */}
-        <button onClick={toggleTheme} className="btn btn-primary mb-3">
+        {/* <button onClick={toggleTheme} className="btn btn-primary mb-3">
           Toggle Theme
-        </button>
+        </button> */}
 
         <div className="container-fluid">
           <div className="title">
@@ -69,9 +69,7 @@ export default function Homepage() {
             </div>
 
             {/* Product Cards */}
-            <div className="products-cards">
               <Product searchTerm={searchTerm} setCount={setCount} setTotal={setTotal} count={count} total={total} message={"Hello welcome"}/>
-            </div>
           </div>
         </div>
       </div>

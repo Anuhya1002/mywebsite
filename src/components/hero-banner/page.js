@@ -52,7 +52,7 @@ const herobanner = () => {
           life. We're dedicated to providing the best solutions for our
           customers.
         </p>
-        <button style={styles.button}>Learn More</button>
+        <a style={styles.button} href="/Login">Learn More</a>
       </div>
       <div style={styles.imageContent}>
         <img src="/onepeice.jpg" alt="Hero Banner" style={styles.image} />
